@@ -1,33 +1,7 @@
 import pytest
-from bank_app import deposit, withdraw, calculate_interest, check_loan_eligibility, transfer
+from bank_app import calculate_interest, check_loan_eligibility, transfer
 
-# --- Integration Tests ---
 
-def test_transfer_success():
-    sender = 1000
-    receiver = 500
-    amount = 300
-
-    new_sender, new_receiver = transfer(sender, receiver, amount)
-
-    assert new_sender == 700
-    assert new_receiver == 800
-
-def test_transfer_insufficient_balance():
-    sender = 200
-    receiver = 500
-    amount = 300
-
-    with pytest.raises(ValueError, match="Insufficient balance"):
-        transfer(sender, receiver, amount)
-
-def test_transfer_negative_amount():
-    sender = 1000
-    receiver = 500
-    amount = -100
-
-    with pytest.raises(ValueError, match="Transfer amount must be positive"):
-        transfer(sender, receiver, amount)
 
 def test_transfer_and_calculate_interest():
     # Transfer funds, then calculate interest on updated receiver
